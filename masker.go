@@ -90,12 +90,15 @@ func MaskEmail(email string) string {
 	name := parts[0]
 	domain := parts[1]
 
-	if len(name) == 1 {
-		return "*" + "@" + domain
-	} else if len(name) > 1 {
-		return string(name[0]) + strings.Repeat("*", len(name)-1) + "@" + domain
+	if len(name) == 0 {
+		return "*@" + domain
 	}
-	return strings.Repeat("*", len(email))
+
+	if len(name) == 1 {
+		return "*@" + domain
+	}
+
+	return string(name[0]) + strings.Repeat("*", len(name)-1) + "@" + domain
 }
 
 // MaskPhone masks phone numbers in the format "+90 555 123 4567",
